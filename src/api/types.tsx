@@ -1,5 +1,3 @@
-import { keyValueString } from '../data/generic-types';
-
 export type DataType = {
   id: number;
   email: string;
@@ -8,13 +6,13 @@ export type DataType = {
 export type UserType = {
   id: number;
   contact: string | null;
-  created_at: string;
   email: string;
-  updated_at: string;
   username: string | null;
+  created_at?: string;
+  updated_at?: string;
 };
 
-export interface LeadType {
+export type LeadType = {
   id: number;
   client_address: string;
   client_contact: string;
@@ -27,9 +25,27 @@ export interface LeadType {
   sale: string | null;
   text_type: string;
   user: UserType;
-}
+};
+
+export type PhaseType = {
+  id: number;
+  phase_name: string;
+  created_at: string;
+  start_date: string;
+  end_date: string;
+  status: string;
+  manager: UserType;
+};
 
 export type GlobalResponseType = {
   data: LeadType[];
   status: number;
+};
+
+export type defaultPhaseFormType = {
+  phase_name: string;
+  start_date: Date;
+  end_date: Date;
+  manager_id: string;
+  lead_id: number;
 };

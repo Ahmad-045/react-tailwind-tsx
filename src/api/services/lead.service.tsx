@@ -1,4 +1,4 @@
-import { LeadType, GlobalResponseType } from '../types';
+import { LeadType } from '../types';
 import http from '../http-common';
 
 class LeadService {

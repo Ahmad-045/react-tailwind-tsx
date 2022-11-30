@@ -4,12 +4,21 @@ import UserContext from './user-context';
 type Props = {
   children?: React.ReactNode;
 };
+interface IRoles {
+  id: number;
+  name: string;
+  resource_type: string | null;
+  resource_id: string | null;
+  created_at: string;
+  updated_at: string;
+}
 
 export interface IUserProps {
   id: number;
   email: string;
   username: string;
   contact: string;
+  roles: IRoles[];
 }
 
 export type GlobalContext = {

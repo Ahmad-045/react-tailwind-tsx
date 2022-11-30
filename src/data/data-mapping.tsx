@@ -1,4 +1,4 @@
-import { keyValueString } from './generic-types';
+import { keyValueString, optionsForSelect } from './generic-types';
 
 export const RolesLabel = {
   admin: 'admin',
@@ -13,7 +13,7 @@ export const AVAL_ROLES = [
   { value: 'bd', label: 'Business Developer' },
 ];
 
-export const STATUS_LIST = [
+export const STATUS_LIST: optionsForSelect[] = [
   { value: '0', label: 'not_completed' },
   { value: '1', label: 'completed' },
 ];
@@ -32,7 +32,7 @@ export const LEAD_DETAILS_MAPPING: keyValueString = {
   sale: 'Sale ',
 };
 
-export const USER_DETAILS_MAPPING = {
+export const USER_DETAILS_MAPPING: keyValueString = {
   id: 'ID',
   email: 'Email',
   username: 'Username',

@@ -30,7 +30,6 @@ const Lead = () => {
         setLeadsList={setLeadsList}
         showLeadDetails={showLeadDetailsHandler}
       />
-      ;
       {modalShow && (
         <Modal onhideDetails={() => setModalShow(false)}>
           {singleleadData && <LeadDetails singleleadData={singleleadData} />}

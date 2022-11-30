@@ -7,7 +7,7 @@ interface LeadProps {
 }
 
 const LeadDetails: React.FC<LeadProps> = ({ singleleadData }) => {
-  const keys = Object.keys(singleleadData);
+  const keys: string[] = Object.keys(singleleadData);
   const filteredKeys: string[] = keys.filter((key) => key !== 'user');
 
   return (
