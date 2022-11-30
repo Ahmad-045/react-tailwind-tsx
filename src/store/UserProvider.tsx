@@ -1,18 +1,10 @@
 import React, { Dispatch, useState } from 'react';
+import { IRoles } from '../api/types';
 import UserContext from './user-context';
 
 type Props = {
   children?: React.ReactNode;
 };
-interface IRoles {
-  id: number;
-  name: string;
-  resource_type: string | null;
-  resource_id: string | null;
-  created_at: string;
-  updated_at: string;
-}
-
 export interface IUserProps {
   id: number;
   email: string;
@@ -23,18 +15,18 @@ export interface IUserProps {
 
 export type GlobalContext = {
   authToken: string;
-  user: IUserProps;
+  user: IUserProps | null;
   setAuthToken: Dispatch<string>;
-  setUser: Dispatch<IUserProps>;
+  setUser: Dispatch<IUserProps | null>;
 };
 
 const UserProvider: React.FC<Props> = ({ children }) => {
   const [authToken, setAuthToken] = useState<string>('');
-  const [user, setUser] = useState<IUserProps>();
+  const [user, setUser] = useState<IUserProps | null>();
 
   const userContext: GlobalContext = {
     authToken: authToken,
-    user: user as IUserProps,
+    user: user!,
     setAuthToken: setAuthToken,
     setUser: setUser,
   };

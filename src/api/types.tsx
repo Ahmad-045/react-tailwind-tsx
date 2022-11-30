@@ -10,6 +10,7 @@ export type UserType = {
   username: string | null;
   created_at?: string;
   updated_at?: string;
+  roles?: IRoles[];
 };
 
 export type LeadType = {
@@ -64,4 +65,31 @@ export type defaultLeadFormType = {
 export type MakeItSaleType = {
   lead_id: number;
   conversion_date: Date;
+};
+
+export type ImageType = {
+  id: number;
+  image_url: string;
+};
+
+export type CommentType = {
+  id: number;
+  content: string;
+  created_at: string;
+  user: UserType;
+  images?: ImageType[];
+};
+
+export type defaultCommentType = {
+  commentable_id: string | number;
+  commentable_type: string;
+};
+
+export type IRoles = {
+  id: number;
+  name: string;
+  resource_type: string | null;
+  resource_id: string | null;
+  created_at: string;
+  updated_at: string;
 };

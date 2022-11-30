@@ -24,6 +24,17 @@ class PhaseService {
     }
   };
 
+  getEngineersOfPhase = async (phaseId: string | number) => {
+    try {
+      const response = await http.get<UserType[]>(
+        `/get_engineer_users/${phaseId}`
+      );
+      return response;
+    } catch (error) {
+      alert(error);
+    }
+  };
+
   createNewPhase = async (formData: defaultPhaseFormType) => {
     try {
       const response = await http.post(`/phases`, formData);
