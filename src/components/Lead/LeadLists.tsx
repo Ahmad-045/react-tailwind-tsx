@@ -1,19 +1,53 @@
 import React, { Fragment } from 'react';
-import { LeadType } from '../../api/types';
+import { LeadType, MakeItSaleType } from '../../api/types';
 import { useNavigate } from 'react-router-dom';
+import leadService from '../../api/services/lead.service';
 
 interface LeadProp {
   leadslist: LeadType[];
   setLeadsList: React.Dispatch<React.SetStateAction<LeadType[]>>;
   showLeadDetails: (lead: LeadType) => void;
+  setSpinnerShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const LeadLists: React.FC<LeadProp> = ({
   leadslist,
   setLeadsList,
   showLeadDetails,
+  setSpinnerShow,
 }) => {
   const navigate = useNavigate();
+
+  const makeItASale = async (leadId: number) => {
+    const data: MakeItSaleType = {
+      lead_id: leadId,
+      conversion_date: new Date(),
+    };
+    const response = await leadService.leadToProjectConversion(data);
+    if (response?.status === 200) {
+      setLeadsList((prevState) => {
+        let data = [...prevState];
+        let indexOfChangedList = leadslist.findIndex(
+          (list) => list.id === response.data.lead_id
+        );
+        data[indexOfChangedList] = {
+          ...data[indexOfChangedList],
+          sale: response.data.conversion_date,
+        };
+        return data;
+      });
+    }
+
+    setSpinnerShow(false);
+  };
+
+  const deleteLeadHandler = async (leadId: number) => {
+    const response = await leadService.deleteLead(leadId);
+    if (response?.status === 200) {
+      setLeadsList(leadslist.filter((obj) => obj.id !== leadId));
+    }
+  };
+
   return (
     <Fragment>
       <div className="overflow-x-auto relative shadow-md sm:rounded-lg mt-10">
@@ -76,6 +110,34 @@ const LeadLists: React.FC<LeadProp> = ({
                     className="border-2 border-zinc-600 py-1 px-3 rounded-xl ease-in-out duration-200 hover:text-white hover:bg-zinc-600"
                   >
                     Phases & Comments
+                  </button>
+                </td>
+                <td className="py-4 px-6">
+                  {lead.sale ? (
+                    <p>{lead.sale}</p>
+                  ) : (
+                    <button
+                      type="button"
+                      className="bg-blue-500 py-1 px-3 text-white rounded-md"
+                      onClick={() => makeItASale(lead.id)}
+                    >
+                      Make it a Sale
+                    </button>
+                  )}
+                </td>
+                <td className="py-4 px-6">
+                  <button
+                    className="py-1 px-3 rounded-xl ease-in-out duration-200 text-white bg-red-600"
+                    onClick={(e) => {
+                      if (
+                        window.confirm(
+                          'Are you sure you wish to delete this item?'
+                        )
+                      )
+                        deleteLeadHandler(lead.id);
+                    }}
+                  >
+                    Delete
                   </button>
                 </td>
               </tr>

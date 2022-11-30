@@ -29,7 +29,7 @@ const PhaseList: React.FC<PhaseProps> = ({
   const navigate = useNavigate();
 
   const [modalShow, setModalShow] = useState<boolean>(false);
-  const [phaseId, setPhaseId] = useState<number>();
+  const [phaseId, setPhaseId] = useState<number>(0);
   const [spinnerShow, setSpinnerShow] = useState<boolean>(false);
   const [canUpdate, setCanUpdate] = useState<boolean>(false);
 

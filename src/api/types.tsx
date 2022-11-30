@@ -46,6 +46,22 @@ export type defaultPhaseFormType = {
   phase_name: string;
   start_date: Date;
   end_date: Date;
-  manager_id: string;
+  manager_id: string | number;
   lead_id: number;
+};
+
+export type defaultLeadFormType = {
+  project_name: string;
+  client_name: string;
+  client_address: string;
+  client_email: string;
+  client_contact: string;
+  platform_used: string;
+  test_type: number;
+  user_id: number;
+};
+
+export type MakeItSaleType = {
+  lead_id: number;
+  conversion_date: Date;
 };

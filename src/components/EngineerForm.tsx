@@ -16,8 +16,10 @@ interface EngineerFormType {
 }
 
 const EngineerForm: React.FC<EngineerFormType> = ({ phaseid, hideModal }) => {
-  const [engineers, setEngineers] = useState<optionsForSelect[]>([]);
-  const [selectedOptions, setSelectedOptions] = useState([]);
+  const [engineers, setEngineers] = useState<optionsForSelect[] | null>([]);
+  const [selectedOptions, setSelectedOptions] = useState<optionsForSelect[]>(
+    []
+  );
   const [spinnerShow, setSpinnerShow] = useState<boolean>(true);
 
   useEffect(() => {
@@ -43,6 +45,11 @@ const EngineerForm: React.FC<EngineerFormType> = ({ phaseid, hideModal }) => {
     }
   };
 
+  const changeSelectedHandler = (newValue: MultiValue<optionsForSelect>) => {
+    console.log(newValue);
+    // setSelectedOptions({ newValue });
+  };
+
   return (
     <Fragment>
       {spinnerShow ? (
@@ -58,7 +65,7 @@ const EngineerForm: React.FC<EngineerFormType> = ({ phaseid, hideModal }) => {
               components={animatedComponents}
               isMulti
               closeMenuOnSelect={true}
-              onChange={setSelectedOptions}
+              // onChange={changeSelectedHandler}
             />
           )}
           <button
