@@ -22,6 +22,7 @@ const Lead = () => {
     const getLeadData = async () => {
       const response = await leadService.getAll();
       setLeadsList(response!.data);
+      setSpinnerShow(false);
     };
     getLeadData();
   }, []);

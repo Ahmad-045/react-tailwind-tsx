@@ -93,3 +93,16 @@ export type IRoles = {
   created_at: string;
   updated_at: string;
 };
+
+export type LoginInFormType = {
+  email: string;
+  password: string;
+};
+
+export type defaultSignUpFormType = {
+  username: string;
+  email: string;
+  password: string;
+  password_confirmation: string;
+  contact: string;
+};

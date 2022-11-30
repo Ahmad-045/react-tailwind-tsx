@@ -15,14 +15,14 @@ export interface IUserProps {
 
 export type GlobalContext = {
   authToken: string;
-  user: IUserProps | null;
+  user: IUserProps;
   setAuthToken: Dispatch<string>;
-  setUser: Dispatch<IUserProps | null>;
+  setUser: Dispatch<IUserProps>;
 };
 
 const UserProvider: React.FC<Props> = ({ children }) => {
   const [authToken, setAuthToken] = useState<string>('');
-  const [user, setUser] = useState<IUserProps | null>();
+  const [user, setUser] = useState<IUserProps>();
 
   const userContext: GlobalContext = {
     authToken: authToken,
